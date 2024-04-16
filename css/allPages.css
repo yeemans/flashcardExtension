@@ -1,0 +1,18 @@
+/* style.css */
+/* Hide the default radio buttons */
+input[type="radio"] {
+    display: none;
+}
+
+/* Style the labels for the radio buttons */
+label {
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Style the selected label */
+input[type="radio"]:checked + label {
+    font-weight: bold; /* Example: Make the selected label bold */
+    /* Add any other styling as needed */
+}
