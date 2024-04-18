@@ -6,11 +6,23 @@
     <title>New Card</title>
 </head>
 <body>
-    <label for="frontInput">Front Input</label>
-    <input id="frontInput" type="text" />
+    <h1 id="statusMessage"></h1>
+    <div> 
+        <select id="deckSelect">
+            <option value="custom">Create New Deck</option>
+        </select>
+        <input type="text" id="customInput">
+        <button id="addNewDeckButton">Add Deck</button>
+    </div>
+    <div> 
+        <label for="frontInput">Front Input</label>
+        <input id="frontInput" type="text" />
+    </div>
 
-    <label for="backInput">Back Input</label>
-    <input id="backInput" type="text" />
+    <div>
+        <label for="backInput">Back Input</label>
+        <input id="backInput" type="text" />
+    </div>
     
     <script src="scripts/newCard.js"></script>
 </body>
