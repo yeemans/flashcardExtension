@@ -8,8 +8,9 @@
 <body>
     <h1 id="statusMessage"></h1>
     <div> 
+        <h2>Deck Name</h2>
         <select id="deckSelect">
-            <option value="custom">Create New Deck</option>
+            <option value="custom">(New Deck Name)</option>
         </select>
         <input type="text" id="customInput">
         <button id="addNewDeckButton">Add Deck</button>
@@ -22,6 +23,10 @@
     <div>
         <label for="backInput">Back Input</label>
         <input id="backInput" type="text" />
+    </div>
+
+    <div>
+        <button id="createCardButton">Create Card</button>
     </div>
     
     <script src="scripts/newCard.js"></script>

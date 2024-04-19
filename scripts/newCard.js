@@ -53,22 +53,26 @@ function addCustomOption() {
     }
 }
 
+function toggleAddDeckVisibility(deckSelectValue) {
+  const customInput = document.getElementById('customInput');
+  const newDeckButton = document.getElementById('addNewDeckButton');
+
+  if (deckSelectValue === 'custom') {
+    customInput.style.display = 'inline-block';
+    customInput.focus();
+    newDeckButton.style.display = 'inline-block';
+  } else {
+    customInput.style.display = 'none';
+    newDeckButton.style.display = 'none';
+  }
+}
+
 document.getElementById("addNewDeckButton").addEventListener("click", function() {
     addCustomOption();
 });
   
 document.getElementById('deckSelect').addEventListener('change', function() {
-    const customInput = document.getElementById('customInput');
-    const newDeckButton = document.getElementById('addNewDeckButton');
-
-    if (this.value === 'custom') {
-      customInput.style.display = 'inline-block';
-      customInput.focus();
-      newDeckButton.style.display = 'inline-block';
-    } else {
-      customInput.style.display = 'none';
-      newDeckButton.style.display = 'none';
-    }
+  toggleAddDeckVisibility(this.value);
 });
 
 function createNewDeck(deckName) {
@@ -79,10 +83,32 @@ function createNewDeck(deckName) {
     
     localStorage.setItem(deckName, JSON.stringify( {"cards": []} )); // empty array for cards
     document.getElementById("statusMessage").innerText = "New deck created!";
+
+    // set the deckSelect to the new deck
+    document.getElementById("deckSelect").value = deckName;
 }
 
 function deckAlreadyCreated(title) {
   return (localStorage.getItem(title) !== null);
 }
+
+function addCardToDeck() {
+  let front = document.getElementById("frontInput").value;
+  let back = document.getElementById("backInput").value;
+  let selectedDeck = document.getElementById("deckSelect").value;
+  
+  let deck = JSON.parse(localStorage.getItem(selectedDeck));
+  if (deck === "" || deck === null) return;
+  let card = [front, back];
+  
+  deck["cards"].push(card);
+  console.log(deck);
+  console.log(deck["cards"]);
+  localStorage.setItem(selectedDeck, JSON.stringify({"cards": deck["cards"]}));
+}
+document.getElementById("createCardButton").addEventListener("click", function() {
+  addCardToDeck();
+});
+
   
 loadDeckSelect();
