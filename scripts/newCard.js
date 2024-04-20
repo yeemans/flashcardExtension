@@ -17,14 +17,15 @@ function loadDeckSelect() {
   let deckSelect = document.getElementById("deckSelect");
   let deckPairs = []
   for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      const value = localStorage.getItem(key);
+      let key = localStorage.key(i);
+      let value = localStorage.getItem(key);
+      value = JSON.parse(value); // get deck object, from string
+
+      if (!value.hasOwnProperty("cards")) continue; // item in local storage that isnt a deck
+      
+      value = localStorage.getItem(key); // convert back to string
       deckPairs.push([key, value]);
   }
-
-  deckPairs.sort(function(a, b) {
-    return a[0] - b[0]; // Compare the first elements of each deckpair
-  });
 
   for (let keyValuePair of deckPairs)
     addToDeckSelect(deckSelect, keyValuePair[0], keyValuePair[1]);
@@ -45,10 +46,13 @@ function addCustomOption() {
   
     if (selectElement.value === 'custom' && customInput.value.trim() !== '') {
       const customOption = document.createElement('option');
+
       customOption.value = customInput.value;
       customOption.textContent = customInput.value;
       selectElement.appendChild(customOption);
+
       createNewDeck(customInput.value);
+      toggleAddDeckVisibility(customInput.value);
       customInput.value = '';
     }
 }
