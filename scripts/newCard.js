@@ -92,6 +92,10 @@ function createNewDeck(deckName) {
     document.getElementById("deckSelect").value = deckName;
 }
 
+function generateId(){
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
 function deckAlreadyCreated(title) {
   return (localStorage.getItem(title) !== null);
 }
@@ -103,7 +107,7 @@ function addCardToDeck() {
   
   let deck = JSON.parse(localStorage.getItem(selectedDeck));
   if (deck === "" || deck === null) return;
-  let card = [front, back];
+  let card = [front, back, generateId()];
   
   deck["cards"].push(card);
   console.log(deck);

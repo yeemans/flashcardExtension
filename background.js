@@ -38,7 +38,7 @@ function showExtensionPopup(cardText, isFront) {
                     cardText: cardText,
                     isFront: isFront
                 });
-            }, 100); // 0.1 second delay to load popup.js first
+            }, 200); // 0.2 second delay to load popup.js first
         });
     } else {
         // send message to existing tab

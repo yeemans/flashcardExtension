@@ -89,6 +89,14 @@
             to {opacity: 1}
             }
 
+            .container {
+            display: flex; /* Use flexbox */
+            }
+
+            .column {
+            flex: 1; /* Grow to fill available space */
+            margin: 0 10px; /* Add margin between columns */
+            }
         </style>
     </head>
 
@@ -98,6 +106,10 @@
 
             <a class="prev">&#10094;</a>
             <a class="next">&#10095;</a>
+        </div>
+
+        <div id="editAndDeleteCardsContainer">
+
         </div>
         <script src="scripts/showDeck.js"></script>
     </body>
