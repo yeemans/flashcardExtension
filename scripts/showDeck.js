@@ -15,10 +15,11 @@ function showCards(deckName) {
     
     // cards is a dictionary {"cards:" arrayOfCards}
 
-    for (let frontAndBack of cards["cards"]) {
-        let front = frontAndBack[0];
-        let back = frontAndBack[1];
-        let cardDiv = `<div class="flashcard"> <p data-front="${front}" data-back="${back}">${front}</p> </div>`;
+    for (let frontAndBackAndId of cards["cards"]) {
+        let front = frontAndBackAndId[0];
+        let back = frontAndBackAndId[1];
+        let id = frontAndBackAndId[2];
+        let cardDiv = `<div class="flashcard"> <p id=slideshow${id} data-front="${front}" data-back="${back}">${front}</p> </div>`;
         cardsContainer.innerHTML += cardDiv;
     }
 
@@ -108,6 +109,7 @@ function addEditingToCards(deckName) {
             let back = document.getElementById(`${cardId}back`).value;
 
             saveCardChangesToLocalStorage(deckName, front, back, cardId);
+            saveChangesToSlideshow(cardId, front, back);
         })
     }
 }
@@ -123,7 +125,15 @@ function saveCardChangesToLocalStorage(deckName, front, back, cardId) {
     }
 
     localStorage.setItem(deckName, JSON.stringify({"cards": deck["cards"]}));
-    console.log("SET");
+}
+
+function saveChangesToSlideshow(cardId, front, back) {
+    let card = document.getElementById(`slideshow${cardId}`);
+
+    if (card.innerText === card.dataset.front) card.innerText = front;
+    if (card.innerText === card.dataset.back) card.innerText = back;
+    card.dataset.front = front;
+    card.dataset.back = back;
 }
 
 
