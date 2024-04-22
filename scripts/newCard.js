@@ -106,16 +106,17 @@ function addCardToDeck() {
   let selectedDeck = document.getElementById("deckSelect").value;
   
   let deck = JSON.parse(localStorage.getItem(selectedDeck));
-  if (deck === "" || deck === null) return;
+  if (deck === "" || deck === null) return false;
   let card = [front, back, generateId()];
   
   deck["cards"].push(card);
-  console.log(deck);
-  console.log(deck["cards"]);
   localStorage.setItem(selectedDeck, JSON.stringify({"cards": deck["cards"]}));
+  return true;
 }
 document.getElementById("createCardButton").addEventListener("click", function() {
-  addCardToDeck();
+  if (addCardToDeck()) {
+    document.getElementById("statusMessage").innerText = "Card Added to Deck."
+  };
 });
 
   

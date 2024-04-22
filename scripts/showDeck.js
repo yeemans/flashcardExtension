@@ -6,6 +6,7 @@ function setDeckName() {
     showCards(pageHeading.innerText);
     showEditAndDeleteCards(pageHeading.innerText);
     addEditingToCards(pageHeading.innerText);
+    addDeletingToCards(pageHeading.innerText);
 }
 
 function showCards(deckName) {
@@ -19,7 +20,7 @@ function showCards(deckName) {
         let front = frontAndBackAndId[0];
         let back = frontAndBackAndId[1];
         let id = frontAndBackAndId[2];
-        let cardDiv = `<div class="flashcard"> <p id=slideshow${id} data-front="${front}" data-back="${back}">${front}</p> </div>`;
+        let cardDiv = `<div class="flashcard" id=slideDiv${id}> <p id=slideshow${id} data-front="${front}" data-back="${back}">${front}</p> </div>`;
         cardsContainer.innerHTML += cardDiv;
     }
 
@@ -63,8 +64,11 @@ function currentSlide(n) {
 
 function showSlides(n) {
   let slides = document.getElementsByClassName("flashcard");
+  if (slides.length === 0) return;
+
   if (n > slides.length) {slideIndex = 1}
   if (n < 1) {slideIndex = slides.length}
+
   for (let i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
@@ -95,6 +99,7 @@ function showEditAndDeleteCards(deckName) {
         <div class="container" id=${id} data-front="${front}" data-back="${back}"> 
             <input type="text" class="editableCard" value="${front}" id=${id}front /> 
             <input type="text" class="editableCard" value="${back}" id=${id}back /> 
+            <button class="deleteCardButton">Delete</button>
         </div>`;
         container.innerHTML += cardDiv;
     }
@@ -136,4 +141,32 @@ function saveChangesToSlideshow(cardId, front, back) {
     card.dataset.back = back;
 }
 
+function addDeletingToCards(deckName) {
+    let deleteButtons = document.querySelectorAll(".deleteCardButton");
+
+    for (let button of deleteButtons) {
+        button.addEventListener("click", function() {
+            let cardId = this.parentNode.id;
+
+            deleteFromLocalStorage(deckName, cardId);
+            deleteFromSlideshow(cardId);
+        })
+    }
+}
+
+function deleteFromLocalStorage(deckName, cardId) {
+    let deck = JSON.parse(localStorage.getItem(deckName));
+    // delete card from deck
+    deck["cards"] = deck["cards"].filter(function(card) { return card[2] != cardId; })
+    localStorage.setItem(deckName, JSON.stringify({"cards": deck["cards"]}));
+}
+
+function deleteFromSlideshow(cardId) {
+    plusSlides(1); // go to next slide
+    // delete this slide
+    let cardTextBoxes = document.getElementById(cardId);
+    let slide = document.getElementById(`slideDiv${cardId}`);
+    cardTextBoxes.remove();
+    slide.remove();
+}
 
