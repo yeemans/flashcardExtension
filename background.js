@@ -1,6 +1,6 @@
 let lastOpenedPopupId = null;
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === 'popupOpen') {
+  if (message.action === 'popupOpen' && sender !== null && sender.tab !== undefined) {
     lastOpenedPopupId = sender.tab.id;
   } else if (message.action === 'popupClose') {
     lastOpenedPopupId = null;

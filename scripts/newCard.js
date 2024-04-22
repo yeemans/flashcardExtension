@@ -35,7 +35,7 @@ function addToDeckSelect(selectElement, deckName, deckList) {
   deckList = JSON.parse(deckList);
   if (!deckList.hasOwnProperty("cards")) return ""; // item in local storage that isnt a deck
 
-  var deckOption = new Option(deckName, deckName);
+  let deckOption = new Option(deckName, deckName);
   // Insert the new option at the beginning of the options array
   selectElement.appendChild(deckOption);
 }
@@ -113,11 +113,35 @@ function addCardToDeck() {
   localStorage.setItem(selectedDeck, JSON.stringify({"cards": deck["cards"]}));
   return true;
 }
+
 document.getElementById("createCardButton").addEventListener("click", function() {
   if (addCardToDeck()) {
     document.getElementById("statusMessage").innerText = "Card Added to Deck."
   };
 });
+
+document.getElementById("translateButton").addEventListener("click", function() {
+  let sourceText = document.getElementById("frontInput").value;
+  let targetLanguage = document.getElementById("backLanguage").value;
+  const API_KEY = "AIzaSyCT0J6WmzbWeeKNuG_3bNcMZTXDuQhcMV0"
+
+  fetch(`https://translation.googleapis.com/language/translate/v2?key=${API_KEY}&q=${encodeURIComponent(sourceText)}&target=${targetLanguage}`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      }
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log(data);
+      let translatedText = data.data.translations[0].translatedText;
+      document.getElementById("backInput").value = translatedText;
+      console.log(translatedText)
+  })
+  .catch(error => {
+      console.error("Error:", error);
+  });
+})
 
   
 loadDeckSelect();

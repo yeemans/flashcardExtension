@@ -2,7 +2,9 @@
 function setDeckName() {
     // window.location.search is of the form ?deckName=${deckName}
     let pageHeading = document.getElementById("deckTitle");
-    pageHeading.innerText = window.location.search.split("=")[1];
+    // %20 is a URL placeholder for spaces. Replace with an actual space
+    pageHeading.innerText = window.location.search.split("=")[1].replace("%20", " ");
+
     showCards(pageHeading.innerText);
     showEditAndDeleteCards(pageHeading.innerText);
     addEditingToCards(pageHeading.innerText);
@@ -72,6 +74,7 @@ function showSlides(n) {
   for (let i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
+
   slides[slideIndex-1].style.display = "block";
 }
 
@@ -162,11 +165,28 @@ function deleteFromLocalStorage(deckName, cardId) {
 }
 
 function deleteFromSlideshow(cardId) {
-    plusSlides(1); // go to next slide
     // delete this slide
     let cardTextBoxes = document.getElementById(cardId);
     let slide = document.getElementById(`slideDiv${cardId}`);
     cardTextBoxes.remove();
     slide.remove();
+    currentSlide(1);
 }
 
+function deletedCardComesBefore(cardId) {
+    let slides = document.getElementsByClassName("flashcard");
+    if (slides.length === 0) return;
+  
+    for (let i = 0; i < slides.length; i++) {
+      if (document.getElementById("cardsContainer").children[slideIndex-1].id == slides[i].id)
+        return false;
+      if (slides[i].id == `slideDiv${cardId}`) return true;
+    }
+    return false;
+}
+
+function deletingCurrentSlide(cardId) {
+    console.log(document.getElementById("cardsContainer").children[slideIndex-1].id);
+    console.log(`slideDiv${cardId}`);
+    return document.getElementById("cardsContainer").children[slideIndex-1].id === `slideDiv${cardId}`
+}
