@@ -12,14 +12,14 @@ function createRadioContextMenu() {
     // Create the first radio option
     chrome.contextMenus.create({
         id: "front",
-        title: "Send to front",
+        title: "Send To Front",
         contexts: ["selection"]
     });
 
     // Create the second radio option
     chrome.contextMenus.create({
         id: "back",
-        title: "Send to back",
+        title: "Send To Back",
         contexts: ["selection"]
     });
 }

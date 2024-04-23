@@ -1,0 +1,9 @@
+body {
+    background-color: white;
+}
+
+.card-container {
+    display: flex;
+    background-color: black;
+    padding: 10px;
+}

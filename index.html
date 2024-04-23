@@ -1,19 +1,22 @@
 <html>
   <head>
-    <style>
-      body {
-        width: 400px;
-        height: 400px;
-      }
-    </style>
+    <link href="css/index.css" rel="stylesheet" type="text/css"/>
   </head>
-  <body>
-    <div id="deckDiv">
-      <h2>My Decks</h2>
+  <body class="page-container">
+    <div class="body-container">
+      <div class="my-decks-container" id="deckDiv">
+        <div>
+          <h2 class="my-decks-title">My Decks:</h2>
+        </div>
+      </div>
+      <div class="new-deck-container">
+        <h1><a href="newDeck.html">Create New Deck</a></h1>
+        <h1><a href="newCard.html">Add Card to Deck</a></h1>
+      </div>
     </div>
-
-    <h1><a href="newDeck.html">Create a New Deck</a></h1>
-    <h1><a href="newCard.html">Add a Card to a Deck</a></h1>
+   
+    
+    
   </body>
 
   <script src="scripts/showDecks.js"></script>
