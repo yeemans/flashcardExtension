@@ -9,6 +9,7 @@ function setDeckName() {
     showEditAndDeleteCards(pageHeading.innerText);
     addEditingToCards(pageHeading.innerText);
     addDeletingToCards(pageHeading.innerText);
+    showReviewLink(pageHeading.innerText);
 }
 
 function showCards(deckName) {
@@ -189,4 +190,9 @@ function deletingCurrentSlide(cardId) {
     console.log(document.getElementById("cardsContainer").children[slideIndex-1].id);
     console.log(`slideDiv${cardId}`);
     return document.getElementById("cardsContainer").children[slideIndex-1].id === `slideDiv${cardId}`
+}
+
+function showReviewLink(deckName) {
+    let links = document.getElementById("linkContainer");
+    links.innerHTML += `<a href=review.html?deckName=${encodeURIComponent(deckName)}>Review ${deckName}</a>`
 }
