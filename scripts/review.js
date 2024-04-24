@@ -31,7 +31,6 @@ function addCorrectnessCheck(cardId) {
 
     checkAnswerButton.addEventListener("click", function() {
         let userResponse = document.getElementById("userResponse").value;
-        console.log([userResponse, correctAnswer]);
         if (cleanString(userResponse) === cleanString(correctAnswer)) {
             correctness.innerText = "CORRECT";
         } else {
