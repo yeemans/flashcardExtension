@@ -6,15 +6,16 @@
     <link href="css/newCard.css" rel="stylesheet" type="text/css"/>
     <title>New Card</title>
 </head>
-<body>
+<body class="page-container">
+    <div class="body-container">
     <h1 id="statusMessage"></h1>
     <div class="card-container"> 
-        <h2>Deck Name</h2>
+        <h2 class="title">Deck Name</h2>
         <select id="deckSelect">
             <option value="custom">(New Deck Name)</option>
         </select>
         <input type="text" id="customInput">
-        <button id="addNewDeckButton">Add Deck</button>
+        <button  class="submit-button" id="addNewDeckButton">Add Deck</button>
     </div>
 
     <div class="container">
@@ -30,7 +31,7 @@
             <option value="ru">Russian</option>
             <option value="ja">Japanese</option>
         </select>
-        <button id="translateButton">Translate Front to Back</button>
+        <button class="submit-button" id="translateButton">Translate Front to Back</button>
     </div>
 
     <div> 
@@ -43,11 +44,15 @@
         <input id="backInput" type="text" />
     </div>
 
-    <div>
-        <button id="createCardButton">Create Card</button>
+    <div class="create-card-container">
+        <button class="submit-button" id="createCardButton">Create Card</button>
+    </div>
+    <div class="home-container">
+        <a id="home-button" href="index.html"><img id="home-logo" src="home.png"></img></a>
+    </div>
     </div>
     
-    <a href="index.html">Go Home</a>
     <script src="scripts/newCard.js"></script>
 </body>
 </html>
+
