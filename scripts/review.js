@@ -10,35 +10,53 @@ function shuffleDeck(deckName) {
     cards = JSON.parse(cards);
     cards = shuffleArray(cards["cards"]);
     showDeck(cards);
+    addShowAnswerButton(cards);
+    addPreviousCardButton(cards);
 }
 
 let deckIndex = 0;
 function showDeck(cards) {
-    console.log(cards);
     let frontText = cards[deckIndex][0];
     let backText = cards[deckIndex][1];
     let cardId = cards[deckIndex][2];
 
     document.getElementById("cardFront").innerHTML = 
     `<p id=${cardId} data-back=${backText}>${frontText}</p>`;
-    addCorrectnessCheck(cardId);
+    addCorrectnessCheck(backText, cards);
 }
 
-function addCorrectnessCheck(cardId) {
+function addCorrectnessCheck(correctAnswer, deck) {
     let checkAnswerButton = document.getElementById("checkAnswerButton");
-    let correctAnswer = document.getElementById(cardId).dataset.back;
     let correctness = document.getElementById("correctnessStatus");
 
-    checkAnswerButton.addEventListener("click", function() {
+    checkAnswerButton.onclick = function() {
         let userResponse = document.getElementById("userResponse").value;
         if (cleanString(userResponse) === cleanString(correctAnswer)) {
-            correctness.innerText = "CORRECT";
+            goToNextCard(correctness, deck);
         } else {
             correctness.innerText = "WRONG";
         }
-    })
+    }
 }
 
+function goToNextCard(correctness, deck) {
+    correctness.innerText = ""; // clear "WRONG" if needed
+    if ( (deckIndex + 1) < deck.length) {
+        deckIndex++;
+        showDeck(deck);
+        // reset user input to blank box
+        document.getElementById("userResponse").value = "";
+        return;
+    } 
+
+    // user has reviewed every card if condition is false
+    showFinishedReviewing(deck);
+}
+
+function showFinishedReviewing(deck) {
+    deckIndex = 0;
+    showDeck(deck)
+}
 function cleanString(str) {
     console.log(str);
     // Use a regular expression to remove non-alphanumeric characters and punctuation
@@ -53,4 +71,25 @@ function shuffleArray(array) {
     return array;
 }
 
+function addShowAnswerButton(cards) {
+    document.getElementById("showAnswerButton").addEventListener("click", function() {
+        // show the answer
+        let cardId = cards[deckIndex][2];
+        let card = document.getElementById(cardId);
+        document.getElementById("userResponse").value = card.dataset.back; 
+    })
+}
+
+function addPreviousCardButton(deck) {
+    document.getElementById("previousCardButton").addEventListener("click", function() {
+        deckIndex--;
+        // wrap around deck
+        if (deckIndex === -1) deckIndex = deck.length - 1;
+        showDeck(deck);
+
+        // wipe WRONG
+        document.getElementById("correctnessStatus").innerText = "";
+    })
+}
 setHeading();
+

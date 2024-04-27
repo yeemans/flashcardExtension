@@ -9,14 +9,14 @@ function setDeckName() {
     showEditAndDeleteCards(pageHeading.innerText);
     addEditingToCards(pageHeading.innerText);
     addDeletingToCards(pageHeading.innerText);
-    showReviewLink(pageHeading.innerText);
 }
 
 function showCards(deckName) {
-    let cardsContainer = document.getElementById("cardsContainer");
     let cards = localStorage.getItem(deckName);
     cards = JSON.parse(cards);
-    
+    if (cards["cards"].length === 0) return; // empty deck
+
+    let cardsContainer = document.getElementById("cardsContainer");
     // cards is a dictionary {"cards:" arrayOfCards}
 
     for (let frontAndBackAndId of cards["cards"]) {
@@ -28,6 +28,7 @@ function showCards(deckName) {
     }
 
     setFlashcardFlip();
+    showReviewLink(deckName);
 }
 
 // Get all elements with the specified class and attach event listeners using forEach
