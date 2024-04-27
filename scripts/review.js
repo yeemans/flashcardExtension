@@ -31,7 +31,7 @@ function addCorrectnessCheck(correctAnswer, deck) {
 
     checkAnswerButton.onclick = function() {
         let userResponse = document.getElementById("userResponse").value;
-        if (cleanString(userResponse) === cleanString(correctAnswer)) {
+        if (userResponse === correctAnswer) {
             goToNextCard(correctness, deck);
         } else {
             correctness.innerText = "WRONG";
@@ -56,11 +56,6 @@ function goToNextCard(correctness, deck) {
 function showFinishedReviewing(deck) {
     deckIndex = 0;
     showDeck(deck)
-}
-function cleanString(str) {
-    console.log(str);
-    // Use a regular expression to remove non-alphanumeric characters and punctuation
-    return str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 }
 
 function shuffleArray(array) {
