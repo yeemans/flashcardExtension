@@ -1,0 +1,23 @@
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    justify-self: center;
+    align-self: center;
+    align-items: center;
+    background-color: beige;
+    height: 100vh;
+}
+
+.body-container {
+    display: block;
+    align-self: center;
+    justify-self: center;
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid #d1d3d3;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    padding: 24px;
+    height: auto;
+    overflow: auto;
+}

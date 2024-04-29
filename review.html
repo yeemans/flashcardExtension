@@ -1,16 +1,24 @@
 <html>
-    <body>
-        <h1 id="header">Review</h1>
-        <div id="reviewContainer">
-            <div id="cardFront">
-
+    <head>     
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/review.css" rel="stylesheet" type="text/css"/>
+        <title>Review</title>
+    </head>
+    <body class="page-container">
+        <div class="body-container">
+            <h1 id="header">Review</h1>
+            <div id="reviewContainer">
+                <div id="cardFront">
+    
+                </div>
+                <p id="correctnessStatus"></p>
+                <label for="userResponse">What is on the back?</label>
+                <input type="text" id="userResponse" />
+                <button id="checkAnswerButton">Check Answer</button>
+                <button id="showAnswerButton">Show Answer</button>
+                <a href="index.html"><button id="previousCardButton">Go Back</button></a>
             </div>
-            <p id="correctnessStatus"></p>
-            <label for="userResponse">What is on the back?</label>
-            <input type="text" id="userResponse" />
-            <button id="checkAnswerButton">Check Answer</button>
-            <button id="showAnswerButton">Show Answer</button>
-            <button id="previousCardButton">Go Back</button>
         </div>
         <script src="scripts/review.js"></script>
     </body>

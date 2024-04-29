@@ -80,13 +80,6 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";
 }
 
-document.querySelector(".prev").addEventListener("click", function() {
-    plusSlides(-1);
-})
-
-document.querySelector(".next").addEventListener("click", function() {
-    plusSlides(1);
-})
 
 function showEditAndDeleteCards(deckName) {
     let container = document.getElementById("editAndDeleteCardsContainer");
@@ -195,5 +188,5 @@ function deletingCurrentSlide(cardId) {
 
 function showReviewLink(deckName) {
     let links = document.getElementById("linkContainer");
-    links.innerHTML += `<a href=review.html?deckName=${encodeURIComponent(deckName)}>Review ${deckName}</a>`
+    links.innerHTML += `<a href=review.html?deckName=${encodeURIComponent(deckName)}><button class="submit-button" id="createCardButton">Review ${deckName}</button></a>`
 }
