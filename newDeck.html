@@ -1,11 +1,25 @@
 <html>
-  <body>
-    <h1>Create a deck</h1>
-    <label for="deckTitle">Title</label>
-    <input id="deckTitle" type="text" />
-    <button id="createDeckButton">Create Deck</button>
-    <p id="errorMessage"></p>
-    <a href="index.html">Go Home</a>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/newDeck.css" rel="stylesheet" type="text/css"/>
+    <title>New Deck</title>
+  </head>
+  <body class="page-container">
+    <div class="body-container">
+      <div>
+        <h2 class="title">Create A Deck</h2>
+      </div>
+      <div>
+        <label class="deck-title"for="deckTitle">Title</label>
+        <input id="deckTitle" type="text" />
+        <button id="createDeckButton">Create Deck</button>
+        <p id="errorMessage"></p>
+      </div>
+      <div class="home-container">
+        <a id="home-button" href="index.html"><img id="home-logo" src="home.png"></img></a>
+    </div>
+  </div>
   </body>
   <script src="scripts/newDeck.js"></script>
 </html>
